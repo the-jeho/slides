@@ -2,9 +2,9 @@
 
 ## Course Slide Decks
 
-- [week1-01-welcome](week1-01-welcome).
+    - [week1-01-welcome](week1-01-welcome).
 
-- [week2-01-data-viz](week2-01-data-viz).
+<!-- - [week2-01-data-viz](week2-01-data-viz).
 
 - [week2-02-viz-num-cat](week2-02-viz-num-cat).
 
@@ -47,7 +47,7 @@
 <!-- 
 
 
-- [week13-02-named_entity_recognition](week13-02-named_entity_recognition). -->
+- [week13-02-named_entity_recognition](week13-02-named_entity_recognition). --> -->
 
 ## Dev Toolkit Notes
 
