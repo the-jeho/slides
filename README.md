@@ -2,7 +2,7 @@
 
 ## Course Slide Decks
 
-    - [week1-01-welcome](week1-01-welcome).
+- [week1-01-welcome](week1-01-welcome).
 
 <!-- - [week2-01-data-viz](week2-01-data-viz).
 

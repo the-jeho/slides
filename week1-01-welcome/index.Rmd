@@ -52,7 +52,7 @@ library(emo)
 .pull-left-wide[
 ## **Academic & Professional Background**
 
-- **Position:** 3-ear PhD student at Informatics.
+- **Position:** 4-ear PhD student at Informatics.
 - **Domains:** Art, Cultural Informatics, Design, Technology, and Society.
 - **Roots:** Architecture.
 - **Primary Interest:** Design, technology, and human behavior, particularly in human-computer interaction within design contexts.
