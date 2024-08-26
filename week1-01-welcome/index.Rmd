@@ -738,5 +738,3 @@ knitr::include_graphics("img/md-cheatsheet.png")
 # Acknowledgements
 
 - This course and materials were inspired by Mine Centinkaya-Rundel and Posit Education Team.
-
-- Accessibility materials of this course was funded by Teach Access Grant.
