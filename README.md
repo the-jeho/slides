@@ -49,7 +49,7 @@
 
 - [week13-02-named_entity_recognition](week13-02-named_entity_recognition). --> -->
 
-## Dev Toolkit Notes
+<!-- ## Dev Toolkit Notes
 
 Slides are built in using the **xaringan** package. See [here](https://github.com/yihui/xaringan) for more info on xaringan. There are two main reasons for choosing this format:
 
@@ -58,7 +58,7 @@ Slides are built in using the **xaringan** package. See [here](https://github.co
 
 ### Dev Instructions
 
-Each slide deck is in its own folder, and one level above there is a custom css file. To compile the slides use `xaringan::inf_mr(cast_from = "..")`. This will launch the slides in the Viewer, and it will get updated as you edit and save your work.
+Each slide deck is in its own folder, and one level above there is a custom css file. To compile the slides use `xaringan::inf_mr(cast_from = "..")`. This will launch the slides in the Viewer, and it will get updated as you edit and save your work. -->
 
 ## Acknowledgements
 
