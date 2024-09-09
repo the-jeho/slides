@@ -4,11 +4,11 @@
 
 - [week1-01-welcome](week1-01-welcome).
 
-<!-- - [week2-01-data-viz](week2-01-data-viz).
+- [week3-01-data-viz](week2-01-data-viz).
 
-- [week2-02-viz-num-cat](week2-02-viz-num-cat).
+- [week3-02-viz-num-cat](week2-02-viz-num-cat).
 
-- [week4-01-tidy+wrangle](week4-01-tidy+wrangle).
+<!-- - [week4-01-tidy+wrangle](week4-01-tidy+wrangle).
 
 - [week5-01-Fdf-join](week5-01-df-join).
 
