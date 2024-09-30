@@ -14,11 +14,11 @@
 
 - [week5-02-tidying](week5-02-tidying).
 
-<!-- - [week6-01-data-type+class](week6-01-data-type+class).
+- [week6-01-data-type+class](week6-01-data-type+class).
 
 - [week6-02-data-import+recode](week6-02-data-import+recode).
 
-- [week7-01-web-scrape](week7-01-web-scrape).
+<!-- - [week7-01-web-scrape](week7-01-web-scrape).
 
 - [week8-01-functions+iteration](week8-01-functions+iteration).
 

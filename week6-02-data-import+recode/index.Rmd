@@ -790,7 +790,7 @@ ggplot(rel_inc_long, aes(y = religion, x = frequency, fill = income)) +
 .your-turn[
 ### .hand[Your turn!]
 
-- `git clone https://github.com/uiuc-ischool-20238-jseo1005-1/import_practice`
+- `git clone https://github.com/uiuc-ischool-20248-jseo1005-1/import_practice`
 - `nobels-csv.Rmd`
 - Read in the `nobels.csv` file from the `data-raw/` folder.
 - Split into two (STEM and non-STEM): 

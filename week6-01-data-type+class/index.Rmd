@@ -770,7 +770,7 @@ hotels %>%
 .your-turn[
 ### .hand[Your turn!]
 
-- `git clone https://github.com/uiuc-ischool-20238-jseo1005-1/data_type_class_practice`
+- `git clone https://github.com/uiuc-ischool-20248-jseo1005-1/data_type_class_practice`
 - `type-coercion.Rmd`
 - What is the type of the given vectors? First, guess. Then, try it out in R. 
 If your guess was correct, great! If not, discuss why they have that type.
