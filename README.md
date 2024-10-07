@@ -18,11 +18,11 @@
 
 - [week6-02-data-import+recode](week6-02-data-import+recode).
 
-<!-- - [week7-01-web-scrape](week7-01-web-scrape).
+- [week7-01-web-scrape](week7-01-web-scrape).
 
-- [week8-01-functions+iteration](week8-01-functions+iteration).
+- [week7-02-functions+iteration](week7-02-functions+iteration).
 
-- [week9-01-studies-confounding](week9-01-studies-confounding).
+<!-- - [week9-01-studies-confounding](week9-01-studies-confounding).
 
 - [week9-02-effective-dataviz](week9-02-effective-dataviz).
 
