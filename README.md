@@ -47,7 +47,7 @@
 <!-- 
 
 
-- [week13-02-named_entity_recognition](week13-02-named_entity_recognition). --> -->
+- [week13-02-named_entity_recognition](week13-02-named_entity_recognition). -->
 
 <!-- ## Dev Toolkit Notes
 
