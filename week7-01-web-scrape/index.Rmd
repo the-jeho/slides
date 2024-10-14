@@ -403,37 +403,12 @@ knitr::include_graphics("img/stringr.png")
 
 ---
 
-## Clean up the text
-
-```{r output.lines=15}
-page %>%
-  html_elements(".cli-title-metadata > span:nth-child(1)") %>%
-  html_text()
-#  %>%  str_remove("\\(") # remove (
-```
-
----
-
-## Clean up the text
-
-```{r output.lines=14}
-page %>%
-  html_elements(".cli-title-metadata > span:nth-child(1)") %>%
-  html_text()
-#  %>%  str_remove("\\(") %>% # remove (
-# str_remove("\\)") # remove )
-```
-
----
-
 ## Convert to numeric
 
 ```{r output.lines=13}
 page %>%
   html_elements(".cli-title-metadata > span:nth-child(1)") %>%
   html_text() %>%
-  # str_remove("\\(") %>% # remove (
-  # str_remove("\\)") %>% # remove )
   as.numeric()
 ```
 
@@ -446,8 +421,6 @@ page %>%
 years <- page %>%
   html_elements(".cli-title-metadata > span:nth-child(1)") %>%
   html_text() %>%
-  # str_remove("\\(") %>% # remove (
-  # str_remove("\\)") %>% # remove )
   as.numeric()
 
 years
