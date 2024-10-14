@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="author" content="JooYoung Seo" />
     <script src="libs/header-attrs/header-attrs.js"></script>
-    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
-    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
     <script src="libs/panelset/panelset.js"></script>
     <script src="libs/tone/Tone.js"></script>
@@ -14,13 +14,19 @@
     <link rel="stylesheet" href="../xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="../slides.css" type="text/css" />
   </head>
-  <body data-at-shortcutkeys = "&#123;&quot;k&quot;: &quot;Go the previous slide&quot;, &quot;j&quot;: &quot;Go the next slide&quot;, &quot;b&quot;: &quot;Toggle black out a slide&quot;, &quot;m&quot;: &quot;Toggle mirror a slide&quot;, &quot;f&quot;: &quot;Toggle fullscreen mode&quot;, &quot;w&quot;: &quot;Toggle widescreen mode&quot;, &quot;c&quot;: &quot;Clone slides to a new browser window&quot;, &quot;p&quot;: &quot;Toggle the presenter mode&quot;&#125;">
+  <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Functions and Iteration
+]
+.subtitle[
 ## <br><br> IS 407
+]
+.author[
 ### JooYoung Seo
+]
 
 ---
 
@@ -65,7 +71,7 @@ class: middle
 ## 13 Coronavirus (COVID-1~ 2021-03-05 Scottis~ Parliam~ "Hel~ http~
 ## 14 Coronavirus (COVID-1~ 2021-03-04 Scottis~ Parliam~ "I w~ http~
 ## 15 Coronavirus (COVID-1~ 2021-03-02 Scottis~ Stateme~ "Pre~ http~
-## # ... with 203 more rows
+## # i 203 more rows
 ```
 
 
@@ -104,7 +110,7 @@ class: middle
 ## Read page for 26 Oct speech
 
 
-```r
+``` r
 url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
 speech_page &lt;- read_html(url)
 ```
@@ -113,7 +119,7 @@ speech_page &lt;- read_html(url)
 
 .pull-left[
 
-```r
+``` r
 speech_page
 ```
 
@@ -135,16 +141,16 @@ speech_page
 .pull-left-wide[
 &lt;br&gt;&lt;br&gt;
 
-```r
+``` r
 title &lt;- speech_page %&gt;%
-    html_node(".article-header__title") %&gt;%
+    html_element("#main-content &gt; header &gt; div.gov_sublayout__title &gt; h1") %&gt;%
     html_text()
 
 title
 ```
 
 ```
-## [1] "Coronavirus (COVID-19) update: First Minister's speech 26 October"
+## [1] NA
 ```
 ]
 .pull-right-narrow[
@@ -157,28 +163,28 @@ title
 
 .pull-left-wide[
 
-```r
+``` r
 library(lubridate)
 
 speech_page %&gt;%
-    html_node(".content-data__list:nth-child(1) strong") %&gt;%
+    html_element("#sg-meta__publication-date") %&gt;%
     html_text() 
 ```
 
 ```
-## [1] "26 Oct 2020"
+## [1] NA
 ```
 
-```r
+``` r
 date &lt;- speech_page %&gt;%
-    html_node(".content-data__list:nth-child(1) strong") %&gt;%
+    html_element("#sg-meta__publication-date") %&gt;%
     html_text() %&gt;%
     dmy()
 date
 ```
 
 ```
-## [1] "2020-10-26"
+## [1] NA
 ```
 ]
 .pull-right-narrow[
@@ -191,16 +197,16 @@ date
 
 .pull-left-wide[
 
-```r
+``` r
 location &lt;- speech_page %&gt;%
-    html_node(".content-data__list+ .content-data__list strong") %&gt;%
+    html_element("div.gov_sublayout__metadata &gt; dl &gt; div:nth-child(5) &gt; dd &gt; strong") %&gt;%
     html_text()
 
 location
 ```
 
 ```
-## [1] "St Andrew's House, Edinburgh"
+## [1] NA
 ```
 ]
 .pull-right-narrow[
@@ -213,16 +219,16 @@ location
 
 .pull-left-wide[
 
-```r
+``` r
 abstract &lt;- speech_page %&gt;%
-    html_node(".leader--first-para p") %&gt;%
+    html_element("#main-content &gt; header &gt; div.gov_sublayout__content &gt; p") %&gt;%
     html_text()
 
 abstract
 ```
 
 ```
-## [1] "Statement given by First Minister Nicola Sturgeon at a media briefing in St Andrew's House on Monday 26 October 2020."
+## [1] NA
 ```
 ]
 .pull-right-narrow[
@@ -235,9 +241,9 @@ abstract
 
 .pull-left-wide[
 
-```r
+``` r
 text &lt;- speech_page %&gt;% 
-    html_nodes("#preamble p") %&gt;%
+    html_elements("#preamble &gt; div &gt; p:nth-child(n+2)") %&gt;%
     html_text() %&gt;%
     list()
 
@@ -269,7 +275,7 @@ text
 
 .pull-left[
 
-```r
+``` r
 oct_26_speech &lt;- tibble(
   title    = title,
   date     = date,
@@ -284,9 +290,9 @@ oct_26_speech
 
 ```
 ## # A tibble: 1 x 6
-##   title                  date       location abstract text  url  
-##   &lt;chr&gt;                  &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;lis&gt; &lt;chr&gt;
-## 1 Coronavirus (COVID-19~ 2020-10-26 St Andr~ Stateme~ &lt;chr&gt; http~
+##   title date   location abstract text       url                  
+##   &lt;chr&gt; &lt;date&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;list&gt;     &lt;chr&gt;                
+## 1 &lt;NA&gt;  NA     &lt;NA&gt;     &lt;NA&gt;     &lt;chr [47]&gt; https://www.gov.scot~
 ```
 ]
 .pull-right[
@@ -298,7 +304,7 @@ oct_26_speech
 ## Read page for 23 Oct speech
 
 
-```r
+``` r
 url &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
 speech_page &lt;- read_html(url)
 ```
@@ -306,7 +312,7 @@ speech_page &lt;- read_html(url)
 
 
 
-```r
+``` r
 speech_page
 ```
 
@@ -322,26 +328,26 @@ speech_page
 ## Extract components of 23 Oct speech
 
 
-```r
+``` r
 title &lt;- speech_page %&gt;%
-  html_node(".article-header__title") %&gt;%
+  html_element("#main-content &gt; header &gt; div.gov_sublayout__title &gt; h1") %&gt;%
   html_text()
 
 date &lt;- speech_page %&gt;%
-  html_node(".content-data__list:nth-child(1) strong") %&gt;%
+  html_element("#sg-meta__publication-date") %&gt;%
   html_text() %&gt;%
   dmy()
 
 location &lt;- speech_page %&gt;%
-  html_node(".content-data__list+ .content-data__list strong") %&gt;%
+  html_element("div.gov_sublayout__metadata &gt; dl &gt; div:nth-child(5) &gt; dd &gt; strong") %&gt;%
   html_text()
 
 abstract &lt;- speech_page %&gt;%
-  html_node(".leader--first-para p") %&gt;%
+  html_element("#main-content &gt; header &gt; div.gov_sublayout__content &gt; p") %&gt;%
   html_text()
 
 text &lt;- speech_page %&gt;%
-  html_nodes("#preamble p") %&gt;%
+  html_elements("#preamble &gt; div &gt; p:nth-child(n+2)") %&gt;%
   html_text() %&gt;%
   list()
 ```
@@ -352,7 +358,7 @@ text &lt;- speech_page %&gt;%
 
 .pull-left[
 
-```r
+``` r
 oct_23_speech &lt;- tibble(
   title    = title,
   date     = date,
@@ -367,9 +373,9 @@ oct_23_speech
 
 ```
 ## # A tibble: 1 x 6
-##   title                  date       location abstract text  url  
-##   &lt;chr&gt;                  &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;lis&gt; &lt;chr&gt;
-## 1 Coronavirus (COVID-19~ 2020-10-23 St Andr~ Stateme~ &lt;chr&gt; http~
+##   title date   location abstract text        url                 
+##   &lt;chr&gt; &lt;date&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;list&gt;      &lt;chr&gt;               
+## 1 &lt;NA&gt;  NA     &lt;NA&gt;     &lt;NA&gt;     &lt;chr [134]&gt; https://www.gov.sco~
 ```
 ]
 .pull-right[
@@ -437,29 +443,29 @@ Assuming that the page structure is the same for each speech page, how many "thi
 .pull-left-wide[
 .xsmall[
 
-```r
+``` r
 url_23_oct &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
 speech_page &lt;- read_html(url_23_oct)
 
 title &lt;- speech_page %&gt;%
-  html_node(".article-header__title") %&gt;%
+  html_element("#main-content &gt; header &gt; div.gov_sublayout__title &gt; h1") %&gt;%
   html_text()
 
 date &lt;- speech_page %&gt;%
-  html_node(".content-data__list:nth-child(1) strong") %&gt;%
+  html_element("#sg-meta__publication-date") %&gt;%
   html_text() %&gt;%
   dmy()
 
 location &lt;- speech_page %&gt;%
-  html_node(".content-data__list+ .content-data__list strong") %&gt;%
+  html_element("div.gov_sublayout__metadata &gt; dl &gt; div:nth-child(5) &gt; dd &gt; strong") %&gt;%
   html_text()
 
 abstract &lt;- speech_page %&gt;%
-  html_node(".leader--first-para p") %&gt;%
+  html_element("#main-content &gt; header &gt; div.gov_sublayout__content &gt; p") %&gt;%
   html_text()
 
 text &lt;- speech_page %&gt;%
-  html_nodes("#preamble p") %&gt;%
+  html_elements("#preamble &gt; div &gt; p:nth-child(n+2)") %&gt;%
   html_text() %&gt;%
   list()
 
@@ -483,7 +489,7 @@ tibble(
 &lt;br&gt;
 
 
-```r
+``` r
 scrape_speech &lt;- 
 ```
 
@@ -497,7 +503,7 @@ scrape_speech &lt;-
 &lt;br&gt;
 
 
-```r
+``` r
 scrape_speech &lt;- function(x){
   
   
@@ -516,7 +522,7 @@ scrape_speech &lt;- function(x){
 - Place the **code** you have developed in body of the function, a `{` block that immediately follows `function(...)`.
 
 
-```r
+``` r
 scrape_speech &lt;- function(url){
 
   # code we developed earlier to scrape info 
@@ -532,30 +538,30 @@ scrape_speech &lt;- function(url){
 .pull-left-wide[
 .small[
 
-```r
+``` r
 scrape_speech &lt;- function(url) {
   
   speech_page &lt;- read_html(url)
 
   title &lt;- speech_page %&gt;%
-    html_node(".article-header__title") %&gt;%
+    html_element("#main-content &gt; header &gt; div.gov_sublayout__title &gt; h1") %&gt;%
     html_text()
 
   date &lt;- speech_page %&gt;%
-    html_node(".content-data__list:nth-child(1) strong") %&gt;%
+    html_element("#sg-meta__publication-date") %&gt;%
     html_text() %&gt;%
     dmy()
 
   location &lt;- speech_page %&gt;%
-    html_node(".content-data__list+ .content-data__list strong") %&gt;%
+    html_element("div.gov_sublayout__metadata &gt; dl &gt; div:nth-child(5) &gt; dd &gt; strong") %&gt;%
     html_text()
 
   abstract &lt;- speech_page %&gt;%
-    html_node(".leader--first-para p") %&gt;%
+    html_element("#main-content &gt; header &gt; div.gov_sublayout__content &gt; p") %&gt;%
     html_text()
 
   text &lt;- speech_page %&gt;%
-    html_nodes("#preamble p") %&gt;%
+    html_elements("#preamble &gt; div &gt; p:nth-child(n+2)") %&gt;%
     html_text() %&gt;%
     list()
 
@@ -573,7 +579,7 @@ scrape_speech &lt;- function(url) {
 ## Function in action
 
 
-```r
+``` r
 scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/") %&gt;%
   glimpse()
 ```
@@ -584,8 +590,8 @@ scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-upda
 ## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Minister~
 ## $ date     &lt;date&gt; 2020-10-26
 ## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
-## $ abstract &lt;chr&gt; NA
-## $ text     &lt;list&gt; &lt;"\nGood afternoon, and thanks for joining us~
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Stu~
+## $ text     &lt;list&gt; &lt;" Good afternoon, and thanks for joining us. ~
 ## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronavirus~
 ```
 
@@ -594,7 +600,7 @@ scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-upda
 ## Function in action
 
 
-```r
+``` r
 scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/") %&gt;%
   glimpse()
 ```
@@ -605,8 +611,8 @@ scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-upda
 ## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Minister~
 ## $ date     &lt;date&gt; 2020-10-23
 ## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
-## $ abstract &lt;chr&gt; NA
-## $ text     &lt;list&gt; &lt;"\nGood afternoon everyone. Thank you very m~
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Stu~
+## $ text     &lt;list&gt; &lt;" Good afternoon everyone. Thank you very muc~
 ## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronavirus~
 ```
 
@@ -615,7 +621,7 @@ scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-upda
 ## Function in action
 
 
-```r
+``` r
 scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-22-october/") %&gt;%
   glimpse()
 ```
@@ -626,8 +632,8 @@ scrape_speech(url = "https://www.gov.scot/publications/coronavirus-covid-19-upda
 ## $ title    &lt;chr&gt; "Coronavirus (COVID-19) update: First Minister~
 ## $ date     &lt;date&gt; 2020-10-22
 ## $ location &lt;chr&gt; "St Andrew's House, Edinburgh"
-## $ abstract &lt;chr&gt; NA
-## $ text     &lt;list&gt; &lt;"\nGood afternoon, let me start as usual wit~
+## $ abstract &lt;chr&gt; "Statement given by First Minister Nicola Stu~
+## $ text     &lt;list&gt; &lt;" Good afternoon, let me start as usual with ~
 ## $ url      &lt;chr&gt; "https://www.gov.scot/publications/coronavirus~
 ```
 
@@ -645,7 +651,7 @@ class: middle
 - They take input(s) defined in the function definition
 
 
-```r
+``` r
 function([inputs separated by commas]) {
   # what to do with those inputs
 }
@@ -654,7 +660,7 @@ function([inputs separated by commas]) {
 - By default they return the last value computed in the function
 
 
-```r
+``` r
 scrape_page &lt;- function(x){
   # do bunch of stuff with the input...
   
@@ -673,7 +679,7 @@ What is going on here?
 ]
 
 
-```r
+``` r
 add_2 &lt;- function(x) {
   x + 2
   1000
@@ -681,7 +687,7 @@ add_2 &lt;- function(x) {
 ```
 
 
-```r
+``` r
 add_2(3)
 ```
 
@@ -689,7 +695,7 @@ add_2(3)
 ## [1] 1000
 ```
 
-```r
+``` r
 add_2(10)
 ```
 
@@ -722,7 +728,7 @@ add_2(10)
 - Avoid overwriting existing (especially widely used) functions
 
 
-```r
+``` r
 # JUST DON'T
 mean &lt;- function(x) { 
   x * 3 
@@ -735,7 +741,7 @@ mean &lt;- function(x) {
 ## Use `scrape_speech()`
 
 
-```r
+``` r
 url_26_oct &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-26-october/"
 scrape_speech(url = url_26_oct)
 ```
@@ -744,10 +750,10 @@ scrape_speech(url = url_26_oct)
 ## # A tibble: 1 x 6
 ##   title                  date       location abstract text  url  
 ##   &lt;chr&gt;                  &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;lis&gt; &lt;chr&gt;
-## 1 Coronavirus (COVID-19~ 2020-10-26 St Andr~ &lt;NA&gt;     &lt;chr&gt; http~
+## 1 Coronavirus (COVID-19~ 2020-10-26 St Andr~ Stateme~ &lt;chr&gt; http~
 ```
 
-```r
+``` r
 url_23_oct &lt;- "https://www.gov.scot/publications/coronavirus-covid-19-update-first-ministers-speech-23-october/"
 scrape_speech(url = url_23_oct)
 ```
@@ -756,7 +762,7 @@ scrape_speech(url = url_23_oct)
 ## # A tibble: 1 x 6
 ##   title                  date       location abstract text  url  
 ##   &lt;chr&gt;                  &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;lis&gt; &lt;chr&gt;
-## 1 Coronavirus (COVID-19~ 2020-10-23 St Andr~ &lt;NA&gt;     &lt;chr&gt; http~
+## 1 Coronavirus (COVID-19~ 2020-10-23 St Andr~ Stateme~ &lt;chr&gt; http~
 ```
 
 ---
@@ -781,25 +787,25 @@ You now have a function that will scrape the relevant info on speeches given the
 ## All URLs
 
 
-```r
+``` r
 all_speeches_page &lt;- read_html("https://www.gov.scot/collections/first-ministers-speeches/")
 
 all_speeches_page %&gt;%
-  html_nodes(".collections-list a") %&gt;%
+  html_elements(".collections-list a") %&gt;%
   html_attr("href")
 ```
 
 ```
-##   [1] "/publications/international-womens-day-2022-first-ministers-statement-8-march-2022/"                 
-##   [2] "/publications/solidarity-ukraine-debate-first-ministers-statement/"                                  
-##   [3] "/publications/cosla-conference-2022-first-ministers-speech/"                                         
-##   [4] "/publications/coronavirus-covid-19-update-first-ministers-speech-tuesday-22-february-2022/"          
-##   [5] "/publications/coronavirus-covid-19-update-first-ministers-statement-8-february-2022/"                
-##   [6] "/publications/coronavirus-covid-19-update-first-ministers-statement-1-february-2022/"                
-##   [7] "/publications/coronavirus-covid-19-update-first-ministers-statement-25-january-2022/"                
-##   [8] "/publications/coronavirus-covid-19-update-first-ministers-statement-18-january-2022/"                
-##   [9] "/publications/coronavirus-covid-19-update-first-ministers-statement-11-january-2022/"                
-##  [10] "/publications/coronavirus-covid-19-update-first-ministers-statement-5-january-2022/"                 
+##   [1] "/publications/floating-offshore-wind-conference-first-ministers-speech/"                                                           
+##   [2] "/publications/first-ministers-opening-speech-challenge-poverty-week/"                                                              
+##   [3] "/publications/first-ministers-speech-cosla-conference-and-exhibition-2024/"                                                        
+##   [4] "/publications/creating-a-modern-diverse-dynamic-scotland-first-ministers-speech/"                                                  
+##   [5] "/publications/programme-for-government-first-ministers-speech-4-september-2024/"                                                   
+##   [6] "/publications/community-cohesion-first-ministers-statement/"                                                                       
+##   [7] "/publications/ukrainian-independence-day-first-ministers-speech/"                                                                  
+##   [8] "/publications/international-holocaust-remembrance-alliance-reception-first-minister-speech/"                                       
+##   [9] "/publications/royal-highland-show-2024-first-ministers-speech/"                                                                    
+##  [10] "/publications/first-ministers-priorities-scotland/"                                                                                
 ...
 ```
 
@@ -808,9 +814,9 @@ all_speeches_page %&gt;%
 ## COVID-19 URLs *fragments*
 
 
-```r
+``` r
 all_speeches_page %&gt;%
-  html_nodes(".collections-list a") %&gt;%
+  html_elements(".collections-list a") %&gt;%
   html_attr("href") %&gt;%
   str_subset("covid-19")
 ```
@@ -834,9 +840,9 @@ all_speeches_page %&gt;%
 ## COVID-19 URLs
 
 
-```r
+``` r
 all_speeches_page %&gt;%
-  html_nodes(".collections-list a") %&gt;%
+  html_elements(".collections-list a") %&gt;%
   html_attr("href") %&gt;%
   str_subset("covid-19") %&gt;%
   str_c("https://www.gov.scot", .)
@@ -861,9 +867,9 @@ all_speeches_page %&gt;%
 ## Save COVID-19 URLs
 
 
-```r
+``` r
 covid_speech_urls &lt;- all_speeches_page %&gt;%
-  html_nodes(".collections-list a") %&gt;%
+  html_elements(".collections-list a") %&gt;%
   html_attr("href") %&gt;%
   str_subset("covid-19") %&gt;%
   str_c("https://www.gov.scot", .)
@@ -898,7 +904,7 @@ class: middle
 - Goal: Scrape info on all COVID-19 speeches of the First Minister
 - So far:
 
-```r
+``` r
 scrape_speech(covid_speech_urls[1])
 scrape_speech(covid_speech_urls[2])
 scrape_speech(covid_speech_urls[3])
@@ -932,7 +938,7 @@ How can we tell R to apply the `scrape_speech()` function to each link in `covid
 Suppose we have exam 1 and exam 2 scores of 4 students stored in a list...
 
 
-```r
+``` r
 exam_scores &lt;- list(
   exam1 &lt;- c(80, 90, 70, 50),
   exam2 &lt;- c(85, 83, 45, 60)
@@ -944,7 +950,7 @@ exam_scores &lt;- list(
 ...and we find the mean score in each exam
 
 
-```r
+``` r
 map(exam_scores, mean)
 ```
 
@@ -961,7 +967,7 @@ map(exam_scores, mean)
 ...and suppose we want the results as a numeric (double) vector
 
 
-```r
+``` r
 map_dbl(exam_scores, mean)
 ```
 
@@ -972,8 +978,14 @@ map_dbl(exam_scores, mean)
 ...or as a character string
 
 
-```r
+``` r
 map_chr(exam_scores, mean)
+```
+
+```
+## Warning: Automatic coercion from double to character was deprecated in purrr 1.0.0.
+## i Please use an explicit call to `as.character()` within `map_chr()` instead.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 ```
 
 ```
@@ -1004,7 +1016,7 @@ Functions for looping over an object and returning a value (of a specific type):
 - and return a data frame by row binding
 
 
-```r
+``` r
 covid_speeches &lt;- map_dfr(covid_speech_urls, scrape_speech)
 ```
 
@@ -1013,7 +1025,7 @@ covid_speeches &lt;- map_dfr(covid_speech_urls, scrape_speech)
 
 
 
-```r
+``` r
 covid_speeches %&gt;%
   print(n = 15)
 ```
@@ -1037,7 +1049,7 @@ covid_speeches %&gt;%
 ## 13 Coronavirus (COVID-1~ 2021-03-05 Scottis~ Parliam~ "Hel~ http~
 ## 14 Coronavirus (COVID-1~ 2021-03-04 Scottis~ Parliam~ "I w~ http~
 ## 15 Coronavirus (COVID-1~ 2021-03-02 Scottis~ Stateme~ "Pre~ http~
-## # ... with 203 more rows
+## # i 203 more rows
 ```
 
 ---
@@ -1045,7 +1057,7 @@ covid_speeches %&gt;%
 ## What could go wrong?
 
 
-```r
+``` r
 covid_speeches &lt;- map_dfr(covid_speech_urls, scrape_speech)
 ```
 
@@ -1053,7 +1065,7 @@ covid_speeches &lt;- map_dfr(covid_speech_urls, scrape_speech)
 - If you get `HTTP Error 429 (Too many requests)` you might want to slow down your hits by modifying your function to slow it down by adding a random wait (sleep) time between hitting each link
 
 
-```r
+``` r
 scrape_speech &lt;- function(url) {
   
   # Sleep for randomly generated number of seconds
@@ -1111,6 +1123,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
