@@ -30,9 +30,9 @@
 
 - [week10-02-model-multiple-predictors](week10-02-model-multiple-predictors).
 
-<!-- - [week12-01-logistic-reg+feature_eng](week12-01-logistic-reg+feature_eng).
+- [week11-01-logistic-reg+feature_eng](week11-01-logistic-reg+feature_eng).
 
-- [week9-02-effective-dataviz](week9-02-effective-dataviz).
+<!-- - [week9-02-effective-dataviz](week9-02-effective-dataviz).
 
 - [week13-01-accessible-viz](week13-01-accessible-viz).
 
