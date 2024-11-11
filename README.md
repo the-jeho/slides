@@ -32,11 +32,11 @@
 
 - [week11-01-logistic-reg+feature_eng](week11-01-logistic-reg+feature_eng).
 
-<!-- - [week9-02-effective-dataviz](week9-02-effective-dataviz).
+- [week12-01-accessible-viz](week12-01-accessible-viz).
 
-- [week13-01-accessible-viz](week13-01-accessible-viz).
+- [week12-02-effective-dataviz](week12-02-effective-dataviz).
 
-- [week15-01-regex](week15-01-regex).
+<!-- - [week15-01-regex](week15-01-regex).
 
 - [week15-02-text-analysis_tf](week15-02-text-analysis_tf).
 
