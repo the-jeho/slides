@@ -38,9 +38,9 @@
 
 - [week13-01-regex](week13-01-regex).
 
-<!-- - [week15-02-text-analysis_tf](week15-02-text-analysis_tf).
+- [week15-01-text-analysis_tf](week15-01-text-analysis_tf).
 
-- [week15-03-text-analysis_tfidf+sentimentanal](week15-03-text-analysis_tfidf+sentimentanal)
+- [week15-02-text-analysis_tfidf+sentimentanal](week15-02-text-analysis_tfidf+sentimentanal)
 
 - [week16-01-shiny-practice](week16-01-shiny-practice)
 
